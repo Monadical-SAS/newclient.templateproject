@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ermy@az^%*hmhlfk#22ndaxqcx0q)i1=7+japv&lrs&nl3x)ht'
+SECRET_KEY = os.environ.get('SECRET_KEY', '<SET THIS TO SOMETHING LONG AND RANDOM>').strip()
+if len(SECRET_KEY) < 50:
+    print('[!] Warning: You do not have a secret key set, please set a SECRET_KEY in settings.py')
+    print('    (using random key for now, you will be logged out and back in on every runserver restart)')
+    from django.core.management.utils import get_random_secret_key
+    SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
