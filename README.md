@@ -2,6 +2,9 @@ To use this project template:
 
 1. clone this repo, delete the `.git` folder, and rename it before pushing it as a new repo.
 ```bash
+# project dir should be named clientname.projectname
+# (client name and projectname should each be a single one word, all lowercase, no dashes or underscores)
+#  e.g. zohuddle.matchmaker, pushforward.homenet, oddslingers.poker,  etc.
 git clone https://github.com/Monadical-SAS/newclient.templateproject actualclientname.actualprojectname
 cd actualclientname.actualprojectname
 rm -Rf .git
