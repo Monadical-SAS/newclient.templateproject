@@ -13,31 +13,28 @@ git init
 git remote add origin https://github.com/Monadical-SAS/actualclientname.actualprojectname
 ```
 
-2. Everywhere you see `newclient` should be replaced by the client's name (all one word, all lowercase).  
+2. Everywhere you see `newclient` should be replaced by the client's name (all one word, all lowercase).  Everywhere you see `templateproject` should be replaced by the project's name (all one word, all lowercase).  
 ```bash
 for file in $(ag -l "newclient"); do
-    sed -i "s/$newclient/actualclientname/g" "$file"
+    sed -i "s/newclient/actualclientname/g" "$file"
 done
 ```
-3. Everywhere you see `templateproject` should be replaced by the project's name (all one word, all lowercase).  
 ```bash
 for file in $(ag -l "templateproject"); do
-    sed -i "s/$templateproject/actualprojectname/g" "$file"
+    sed -i "s/templateproject/actualprojectname/g" "$file"
 done
 ```
-4. Rename any files containing `newlcient` or `tempalteproject`, e.g.
+Rename any filenames containing `newlcient` or `tempalteproject` as well, e.g.
 ```bash
 mv templateproject actualprojectname
 mv etc/supervisor/templateproject.conf etc/supervisor/actualprojectname.conf
 ...
 ```
 
-5. Put your Django code inside `./actualprojectname` (final result should be `./actualprojectname/manage.py`), and your frontend JS code inside `./actualprojectname/frontend` (final result should be `./actualprojectname/frontend/index.js`). Update the README thoroughly (and delete these instructions from the top), add your code to git, create your initial commit, and push!
-
-```
-for file in $(ag -l "templateproject"); do
-    sed -i "s/$templateproject/actualprojectname/g" "$file"
-done
+3. Put your Django apps inside `./actualprojectname` (e.g. `./actualprojectname/core/models.py`), and your frontend JS code inside `./actualprojectname/frontend` (e.g.`./actualprojectname/frontend/components/somebutton.js`). Update the README thoroughly (and delete these instructions from the top), add your code to git, create your initial commit, and push!
+```bash
+git add .
+git push --set-upstream origin main main
 ```
 
 ---
