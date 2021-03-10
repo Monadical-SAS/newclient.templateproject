@@ -9,6 +9,7 @@ git clone https://github.com/Monadical-SAS/newclient.templateproject actualclien
 cd actualclientname.actualprojectname
 rm -Rf .git
 git init
+# create the new repo on github as a private/pubic repo under Monadical-SAS or Monadical-Inc first
 git remote add origin https://github.com/Monadical-SAS/actualclientname.actualprojectname
 ```
 
