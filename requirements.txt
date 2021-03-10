@@ -1,0 +1,5 @@
+# all your project python requirements go here
+# keep both dev & prod deps in a single file, separated by a comment # Development Dependencies
+# theres no reason to split them unless you're shipping this project to package to users via PyPI or something
+# (we install all dev packages on all our servers to make debugging issues on prod easier)
+django
