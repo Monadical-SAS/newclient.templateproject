@@ -77,6 +77,8 @@ git push --set-upstream origin main main
 
 ---
 
+<!------------ DELETE FROM HERE UP WHEN FINISHED SETTING UP YOUR PROJECT ---------------------->
+
 # NewClient.TemplateProject
 
 <one line description about the project and what it does here>
