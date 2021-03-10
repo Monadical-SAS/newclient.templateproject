@@ -4,7 +4,7 @@ FROM python:3.9-slim-buster
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PATH=./node_modules/.bin/:$PATH \
-    USE_DOCKER=yes \
+    IN_DOCKER=yes \
     IPYTHONDIR=/app/.ipython
 
 RUN apt-get update \
@@ -21,7 +21,10 @@ COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY --chown=django:django . /app/
-COPY --from=projectname_node --chown=django:django /app/projectname/frontend/static /app/projectname/frontend/static
+
+# replace this line with whatever is needed to copy the built JS from your node container into the django server container
+COPY --from=templateproject_node --chown=django:django /app/templateproject/frontend/static /app/templateproject/frontend/static
+
 RUN ./manage.py collectstatic --noinput
 
 ### Python runtime stage
@@ -34,11 +37,12 @@ VOLUME /app/data/logs
 VOLUME /app/data/static
 VOLUME /app/data/media
 
-ENV RELOAD_DIR=./projectname \
+ENV RELOAD_DIR=./templateproject \
     POSTGRES_HOST=postgres \
     POSTGRES_PORT=5432 \
-    POSTGRES_USER=projectname \
-    POSTGRES_PASSWORD=projectname \
+    POSTGRES_DB=templateproject \
+    POSTGRES_USER=templateproject \
+    POSTGRES_PASSWORD=templateproject \
     HTTP_HOST=0.0.0.0 \
     HTTP_PORT=5000 \
     HTTP_WORKERS=4
