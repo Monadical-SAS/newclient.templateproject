@@ -42,49 +42,38 @@ git push --set-upstream origin main main
 
 *Python Setup Recommendations:*
 
-- Use `pipenv` for package management
-- Use Django w/ PostgreSQL for the backend and DB
-- Setup `mypy` for typechecking
-- Setup `black`, `flake8`, and for linting
-- Setup `pytest` or just use Django tests for testing
-- tried and true time-saving packages:
+- Use Django w/ PostgreSQL or SQLite for database
+- Setup `pipenv`, `mypy`, `black`, `flake8`, and `pytest` for packaging, typechecking, linting, and testing
+- tried and true time-savers:
   - Use the Django admin as much as possible
-  - Use [`python-decouple`](https://github.com/henriquebastos/python-decouple/) or [`django-environ`](https://github.com/joke2k/django-environ) to load your `settings.py` + `.env` config
+  - Use [`python-decouple`](https://github.com/henriquebastos/python-decouple/) or ⭐️ [`django-environ`](https://github.com/joke2k/django-environ) to load your `settings.py` + `.env` config
   - Use [`django-import-export`](https://django-import-export.readthedocs.io/en/latest/) to get CSV/JSON/Excel import/export out of the box in the Django Admin
   - Use [`django-rest-framework`](https://www.django-rest-framework.org/) to build API endpoints
   - Use [`django-allauth`](https://github.com/pennersr/django-allauth) for managing authentication and [`django-anymail`](https://github.com/anymail/django-anymail) to handle sending emails via Mailgun
-  - Use [`django-debug-toolbar`](https://django-debug-toolbar.readthedocs.io/en/latest/) for debugging and [`djdt-flamegraph`](https://github.com/23andMe/djdt-flamegraph) for profiling code performance
+  - Use [`django-debug-toolbar`](https://django-debug-toolbar.readthedocs.io/en/latest/) for debugging and ⭐️ [`djdt-flamegraph`](https://github.com/23andMe/djdt-flamegraph) for profiling code performance
   
 
 *JavaScript Setup Recommendations:*
 
-- Use `yarn` for package management
 - Use `Next.JS` + `React` w/ typescript for the frontend: https://nextjs.org/learn/excel/typescript
-- Setup `typescript` for linitng and typechecking
-- Setup `eslint`, `prettier` and for linting
-- Setup `jest` for testing
-- Use Bootstrap, Formik, and save time building UI layout and forms
-- tried and true time-saving packages:
-  - Use Next.js to handle building, bundling, serving, and exporting your site to static html + JS, don't roll your own build system with webpack or create-react-app
-  - Use [`react-bootsrap`](https://react-bootstrap.github.io/) (preferred) or [`material-ui`](https://github.com/mui-org/material-ui) to save time building UI layout
-  - Use [`formik`](https://formik.org/) to save fime building forms and validation
-  - Use `fetch()` API or `axios` to handle making API requests
-  - use [`date-fns`](https://date-fns.org/) for handling datetimes (not `moment.js`!)
-  - Use a pre-built component library to save time building UI components, e.g.:
-    - https://github.com/ant-design/ant-design
+- Setup `yarn`, `eslint`, `prettier`, `typescript`, and `jest` for packaging, linting, typechecking, and testing
+- tried and true time-savers:
+  - don't use `create-react-app` or roll your own build system with webpack, stick to Next.js!
+  - Use ⭐️ [`react-bootsrap`](https://react-bootstrap.github.io/) or [`material-ui`](https://github.com/mui-org/material-ui) to save time building UI layout
+  - use ⭐️ [`date-fns`](https://date-fns.org/) for handling datetimes (not `moment.js`!)
+  - Use a pre-built component library to save time building UI components & forms, e.g.:
+    - ⭐️ https://formik.org/
+    - ⭐️ https://github.com/ant-design/ant-design
     - https://blueprintjs.com/docs/#core
     - https://evergreen.segment.com/components/
 
 *Hosting Setup Recommendations:*
 
-- Use DigitalOcean for hosting your VPS
+- Use DigitalOcean for hosting your VPS (w/ managed PostgreSQL / Redis for production-critical deployemnts)
 - Use CloudFlare for DNS, SSL, and ingress with Argo tunnels
 - Use Mailgun and Twilio for email/sms/call sending
-- Use Sentry for error tracking and tracing
-- Use Matomo for analytics (https://analytics.zervice.io)
-- Use Github Issues for bug tracking and Github Projects
+- Use Sentry for error tracking and tracing, and Matomo for analytics (https://analytics.zervice.io)
 - Use Snapshooter to automate DigitalOcean backups https://snapshooter.io/
-- Use Digitalocean managed PostgreSQL / Redis for production-critical deployemnts
 
 ---
 
