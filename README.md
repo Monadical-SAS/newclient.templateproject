@@ -13,12 +13,13 @@ git init
 git remote add origin https://github.com/Monadical-SAS/actualclientname.actualprojectname
 ```
 
-2. Everywhere you see `newclient` should be replaced by the client's name (all one word, all lowercase).  Everywhere you see `templateproject` should be replaced by the project's name (all one word, all lowercase).  
+2. Everywhere you see `newclient` should be replaced by the client's name (all one word, all lowercase).
 ```bash
 for file in $(ag -l "newclient"); do
     sed -i "s/newclient/actualclientname/g" "$file"
 done
 ```
+Everywhere you see `templateproject` should be replaced by the project's name (all one word, all lowercase).  
 ```bash
 for file in $(ag -l "templateproject"); do
     sed -i "s/templateproject/actualprojectname/g" "$file"
