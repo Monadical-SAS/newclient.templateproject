@@ -1,17 +1,17 @@
 <!------------ DELETE THESE INSTRUCTIONS WHEN FINISHED SETTING UP YOUR PROJECT ---------------------->
 
-**Use this project template for all new Monadical projects:**
+**Please use this project template for all new Monadical projects (both internal and client-facing)!**
 
-1. clone this repo into `actualclientname.actualprojectname`, delete the `.git` folder, and setup a new Github repo as the origin
+1. clone this repo into `actualclientname.actualprojectname`, and setup a new Github repo as the origin
 ```bash
 # project dir should be named clientname.projectname
 # (client name and projectname should each be a single one word, all lowercase, no dashes or underscores)
 #  e.g. zohuddle.matchmaker, pushforward.homenet, oddslingers.poker,  monadical.www, etc.
 git clone https://github.com/Monadical-SAS/newclient.templateproject actualclientname.actualprojectname
 cd actualclientname.actualprojectname
-rm -Rf .git
-git init
+
 # create the new repo on github as a private/pubic repo under Monadical-SAS or Monadical-Inc first
+git remote rm origin
 git remote add origin https://github.com/Monadical-SAS/actualclientname.actualprojectname
 ```
 
