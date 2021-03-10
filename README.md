@@ -1,6 +1,6 @@
 To use this project template:
 
-1. clone this repo, delete the `.git` folder, and rename it before pushing it as a new repo.
+1. clone this repo into `actualclientname.actualprojectname`, delete the `.git` folder, and setup a new Github repo as the origin
 ```bash
 # project dir should be named clientname.projectname
 # (client name and projectname should each be a single one word, all lowercase, no dashes or underscores)
