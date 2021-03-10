@@ -9,7 +9,6 @@ __pycache__/
 # Data and build outputs
 .env
 data/
-build/
 
 # Environments
 .venv
@@ -25,7 +24,6 @@ lib-cov
 .yarn-integrity
 pip-log.txt
 pip-delete-this-directory.txt
-*.LICENSE.txt
 
 
 # Unit test / coverage reports

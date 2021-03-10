@@ -1,0 +1,90 @@
+# Make sure you have docker-compose --version >= 1.28.5
+# https://docs.docker.com/get-docker/
+# curl -fsSL https://get.docker.com | bash
+# Usage:
+#     docker-compose build --pull
+#     docker-compose ps
+#     docker-compose down
+#     docker-compose run --rm django ./manage.py collectstatic --noinput
+#     docker-compose run --rm django ./manage.py makemigrations
+#     docker-compose run --rm django ./manage.py migrate
+#     docker-compose run --rm django ./manage.py createsuperuser
+#     docker-compose run --rm django ./manage.py changepassword
+#     docker-compose run --rm django ./manage.py shell
+#     docker-compose up
+#     docker-compose up --profile=production
+#
+# On prod only:
+#     download a zervice.io cert from https://www.cloudflare.com/a/warp -> ./data/argo/cert.pem
+#     docker-compose down
+#     docker-compose up --profile=production
+
+version: '3.9'
+
+services:
+  node:
+    image: matchmaker_node
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    command: npm run watch:dev
+    volumes:
+      - .:/app
+      # http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
+      - /app/node_modules
+    expose:
+      - 3000
+      # Expose browsersync UI: https://www.browsersync.io/docs/options/#option-ui
+      - 3001
+
+  django:
+    image: matchmaker_django
+    build: .
+    ports:
+      - 5000:5000
+    expose:
+      - 5000
+    environment:
+      - HTTP_PORT=5000
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=match_maker
+      - POSTGRES_USER=match_maker
+      - POSTGRES_PASSWORD=match_maker
+    volumes:
+      - .:/app
+      - ./data/media:/app/data/media
+      - ./data/static:/app/data/static
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:12.3-alpine
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_DB=match_maker
+      - POSTGRES_USER=match_maker
+      - POSTGRES_PASSWORD=match_maker
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  argo:
+    image: cloudflare/cloudflared
+    command: tunnel --no-autoupdate --retries 8 --hostname newclient-templateproject.zervice.io http://django:8000
+    network_mode: 'service:django'
+    profiles:
+      # means this service will only be started if you use docker-compose --profile=prod up
+      # (only supported on docker-compose --version >= 1.28.5, make sure you're up-to-date)
+      - prod
+    depends_on:
+      - django
+    volumes:
+      # on prod: create ./data/argo/cert.pem (download a zervice.io cert from: https://www.cloudflare.com/a/warp)
+      # on dev:  create ./data/argo/cert.pem as an empty file so that argo doesn't start (echo "argo disabled" >> ./data/argo/cert.pem)
+      - ./data/argo/cert.pem:/etc/cloudflared/cert.pem:ro

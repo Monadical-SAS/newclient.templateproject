@@ -1,0 +1,20 @@
+FROM node:15-buster-slim
+
+ENV PATH=./node_modules/.bin/:$PATH
+
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends python make g++ \
+    && rm -rf /var/lib/apt/lists/* \
+    && python --version \
+    && node --version \
+    && npm --version
+
+WORKDIR /app
+COPY ./package.json /app
+RUN npm install && npm cache clean --force && npm audit && webpack --version
+
+COPY . /app/
+
+RUN npm run build:prod
+
+CMD ["npm", "run", "watch:prod"]
